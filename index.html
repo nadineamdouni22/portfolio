@@ -1,0 +1,676 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Nadine Amdouni Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Portfolio of Nadine Amdouni, junior embedded systems and hardware/firmware integration specialist: PCB design, ATmega328P, ESP32, LoRa, IoT.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky bar with FR/EN and theme toggles; home = hero with real boards, recruiter answers, about, skills, featured AquaLink, project grid, experience, education, contact. Project pages = case study + sticky contribution panel. Light by default, softer navy dark on request. */
+:root {
+  --bg: #f3f6fb;
+  --s1: #ffffff;
+  --s2: #e6edf7;
+  --line: #d9e1ed;
+  --line2: #b7c5da;
+  --ink: #12223d;
+  --soft: #2c3e5c;
+  --muted: #52637e;
+  --accent: #1f5fd6;
+  --accent-ink: #ffffff;
+  --gold: #9a5f0c;
+  --imgbg: #ffffff;
+  --f-display: "Schibsted Grotesk", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #17243a; --s1: #1f2f4a; --s2: #2a3d5d; --line: #34496c; --line2: #4a6590;
+  --ink: #ecf1fa; --soft: #cbd7ea; --muted: #a5b6d0; --accent: #6eabff; --accent-ink: #0b1a33; --gold: #e6b762;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--accent); color: var(--accent-ink); padding: 8px 12px; z-index: 40; }
+.skip:focus { left: 8px; }
+.wrap { max-width: 1120px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--f-display); letter-spacing: -.015em; text-wrap: balance; margin: 0; }
+p { margin: 0 0 14px; max-width: 68ch; }
+
+/* bar */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 21; background: var(--bg); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; align-items: center; gap: 20px; min-height: 58px; flex-wrap: wrap; }
+.brand { font-family: var(--f-mono); font-weight: 500; font-size: 14px; text-decoration: none; margin-right: auto; padding-block: 8px; }
+.brand b { color: var(--accent); font-weight: 500; }
+.nav { display: flex; gap: 20px; font-family: var(--f-mono); font-size: 13px; }
+.nav a { text-decoration: none; color: var(--muted); padding-block: 8px; }
+.nav a:hover { color: var(--accent); }
+.ctl { display: flex; gap: 8px; align-items: center; }
+.seg { display: inline-flex; border: 1px solid var(--line2); border-radius: 4px; overflow: hidden; background: var(--s1); }
+.seg button, .tbtn { font: 500 12px/1 var(--f-mono); background: transparent; color: var(--muted); border: 0; padding: 9px 11px; cursor: pointer; letter-spacing: .04em; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.tbtn { border: 1px solid var(--line2); border-radius: 4px; background: var(--s1); }
+.seg button:hover:not([aria-pressed="true"]), .tbtn:hover { color: var(--accent); }
+@media (max-width: 820px) { .bar .wrap { gap: 0 16px; } .nav { order: 3; width: 100%; overflow-x: auto; gap: 18px; white-space: nowrap; } }
+
+/* buttons, chips */
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { font: 500 14px/1 var(--f-mono); text-decoration: none; padding: 14px 18px; border: 1px solid var(--line2); border-radius: 3px; color: var(--ink); background: var(--s1); display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.pri { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.pri:hover { filter: brightness(1.1); color: var(--accent-ink); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.chips li { font: 400 12.5px var(--f-mono); border: 1px solid var(--line2); padding: 5px 10px; border-radius: 3px; color: var(--ink); background: var(--s1); }
+.chips.dim li { color: var(--muted); }
+.eyebrow { font: 500 12.5px var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+.pill { font: 500 10.5px var(--f-mono); letter-spacing: .08em; text-transform: uppercase; border: 1px solid var(--line2); padding: 2px 7px; border-radius: 3px; color: var(--muted); white-space: nowrap; }
+.pill.real { border-color: var(--accent); color: var(--accent); }
+
+/* hero */
+.hero { padding-block: 52px 68px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 52px; align-items: center; }
+.hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1; font-weight: 700; margin-bottom: 14px; }
+.hero .role { font: 500 15px/1.5 var(--f-mono); color: var(--accent); margin: 0 0 22px; }
+.hero .lede { font-size: 1.12rem; color: var(--soft); margin-bottom: 28px; }
+.hero .chips { margin-top: 28px; }
+.collage { border: 1px solid var(--line2); background: var(--s1); border-radius: 8px; padding: 14px; }
+.collage .two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.collage img { width: 100%; aspect-ratio: 1 / 1; object-fit: contain; background: var(--imgbg); border-radius: 4px; display: block; }
+.collage .cap { font: 400 12px var(--f-mono); color: var(--muted); padding-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; align-items: baseline; }
+@media (max-width: 880px) { .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 32px; } .hero { padding-block: 32px 44px; } }
+
+/* sections */
+.sec { padding-block: 72px; border-top: 1px solid var(--line); }
+.sec-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 32px; margin-bottom: 32px; }
+.sec h2 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1.1; }
+.sec-head p { color: var(--muted); margin: 0; max-width: 46ch; }
+@media (max-width: 720px) { .sec { padding-block: 52px; } }
+
+/* at a glance */
+.qa { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.qa > div { padding: 22px; background: var(--s1); }
+.qa .q { font: 500 12.5px var(--f-mono); color: var(--accent); margin-bottom: 8px; }
+.qa p { margin: 0; font-size: 15.5px; color: var(--soft); }
+.qa a { font: 400 12.5px var(--f-mono); color: var(--muted); text-decoration: none; display: inline-block; margin-top: 10px; }
+.qa a:hover { color: var(--accent); }
+@media (max-width: 900px) { .qa { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+@media (max-width: 560px) { .qa { grid-template-columns: minmax(0, 1fr); } }
+
+/* about */
+.about { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; }
+.fact { padding: 16px 0; border-top: 1px solid var(--line); }
+.fact b { display: block; font: 500 12px var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+@media (max-width: 820px) { .about { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+
+/* skills */
+.skillgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.skillcard { border: 1px solid var(--line); background: var(--s1); border-radius: 6px; padding: 22px; }
+.skillcard h3 { font: 500 13px var(--f-mono); color: var(--accent); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
+.skillrow { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 9px 0; border-top: 1px solid var(--line); font-size: 15.5px; }
+.dots { display: inline-flex; gap: 4px; flex: none; }
+.dots i { width: 14px; height: 14px; border-radius: 2px; border: 1px solid var(--line2); display: block; }
+.dots i.on { background: var(--accent); border-color: var(--accent); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 22px; font: 400 12.5px var(--f-mono); color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend i { width: 14px; height: 14px; border-radius: 2px; background: var(--accent); display: inline-block; }
+.legend i.o { background: transparent; border: 1px solid var(--line2); }
+.legend em { font-style: normal; color: var(--ink); }
+
+/* project cards */
+.feature { display: grid; gap: 28px; border: 1px solid var(--line2); background: var(--s1); border-radius: 8px; padding: 32px; margin-bottom: 24px; }
+.feature .top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 36px; }
+.feature h3 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height: 1.05; margin-bottom: 10px; }
+.tagline { color: var(--soft); font-size: 1.05rem; }
+.stats { display: flex; flex-wrap: wrap; gap: 14px 36px; padding: 18px 0; margin: 18px 0; border-block: 1px dashed var(--line2); }
+.stats div { display: flex; flex-direction: column; }
+.stats strong { font: 500 1.6rem var(--f-mono); color: var(--accent); line-height: 1.2; font-variant-numeric: tabular-nums; }
+.stats span { font-size: 13px; color: var(--muted); }
+.stats.sm strong { font-size: 1.3rem; }
+.strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; align-content: center; }
+.strip figure { margin: 0; }
+.strip img { width: 100%; aspect-ratio: 1 / 1; object-fit: contain; background: var(--imgbg); border: 1px solid var(--line); border-radius: 4px; display: block; }
+.strip figcaption { font: 400 11.5px var(--f-mono); color: var(--muted); margin-top: 6px; }
+.strip .note { grid-column: 1 / -1; font: 400 12px var(--f-mono); color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; align-items: baseline; }
+@media (max-width: 860px) { .feature .top { grid-template-columns: minmax(0, 1fr); gap: 20px; } .feature { padding: 20px; } }
+.grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px; }
+.card { display: flex; flex-direction: column; border: 1px solid var(--line); background: var(--s1); border-radius: 6px; text-decoration: none; overflow: hidden; transition: border-color .15s; }
+.card:hover { border-color: var(--accent); }
+.card .thumb { background: var(--s2); border-bottom: 1px solid var(--line); position: relative; }
+.card .thumb svg { display: block; width: 100%; height: auto; }
+.card .thumb img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+.card .thumb .pill { position: absolute; left: 10px; top: 10px; background: var(--s1); }
+.card .body { padding: 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.card h3 { font-size: 1.3rem; }
+.card p { color: var(--muted); font-size: 15.5px; margin: 0; }
+.card .ctx { font: 400 12px var(--f-mono); color: var(--accent); }
+.card .more { margin-top: auto; font: 500 13px var(--f-mono); color: var(--accent); }
+.g-frame { fill: none; stroke: var(--line2); }
+.g-box { fill: none; stroke: var(--accent); stroke-width: 1.6; }
+.g-fill { fill: var(--s1); stroke: var(--line2); }
+.g-ink { fill: var(--ink); }
+.g-line { stroke: var(--muted); stroke-width: 1.4; fill: none; }
+.t2g { font: 400 11px var(--f-mono); fill: var(--muted); }
+
+/* timeline */
+.tl { list-style: none; margin: 0; padding: 0; }
+.tl li { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 20px; padding: 22px 0; border-top: 1px solid var(--line); }
+.tl time { font: 500 13px var(--f-mono); color: var(--accent); padding-top: 4px; }
+.tl h3 { font-size: 1.15rem; margin-bottom: 2px; }
+.tl .org { color: var(--muted); font-size: 15.5px; margin: 0 0 6px; }
+.tl p { color: var(--soft); font-size: 15.5px; }
+a.lnk { font: 400 12.5px var(--f-mono); color: var(--accent); text-decoration: none; }
+a.lnk:hover { text-decoration: underline; }
+@media (max-width: 560px) { .tl li { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+
+/* contact */
+.contact { display: grid; grid-template-columns: 120px minmax(0, 1fr); max-width: 620px; }
+.contact dt, .contact dd { margin: 0; padding: 14px 0; border-top: 1px solid var(--line); }
+.contact dt { font: 500 12px var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 17px; }
+.contact dd { overflow-wrap: anywhere; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.contact .empty { color: var(--muted); font-style: italic; }
+.copy { font: 500 11.5px var(--f-mono); border: 1px solid var(--line2); background: var(--s1); color: var(--muted); border-radius: 3px; padding: 5px 9px; cursor: pointer; }
+.copy:hover { color: var(--accent); border-color: var(--accent); }
+footer { border-top: 1px solid var(--line); padding-block: 28px 44px; font: 400 12.5px var(--f-mono); color: var(--muted); }
+
+/* project pages */
+.crumb { font: 400 13px var(--f-mono); color: var(--muted); text-decoration: none; display: inline-block; margin-bottom: 28px; }
+.crumb:hover { color: var(--accent); }
+.phead { padding-block: 40px 40px; }
+.phead h1 { font-size: clamp(2.2rem, 5.2vw, 3.8rem); line-height: 1.02; margin-bottom: 14px; }
+.phead .sub { font-size: 1.15rem; color: var(--soft); max-width: 62ch; margin-bottom: 20px; }
+.pbody { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; align-items: start; padding-bottom: 40px; }
+.panel { position: sticky; top: 84px; border: 1px solid var(--line2); background: var(--s1); border-radius: 6px; padding: 22px; }
+.panel h2 { font: 500 12.5px var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.panel ul { margin: 0; padding: 0; list-style: none; }
+.panel li { padding: 9px 0 9px 18px; border-top: 1px solid var(--line); font-size: 15px; position: relative; }
+.panel li::before { content: ""; position: absolute; left: 0; top: 18px; width: 8px; height: 2px; background: var(--accent); }
+.panel .none { color: var(--muted); font-style: italic; }
+.panel .ctxl { margin: 16px 0 0; font: 400 12px var(--f-mono); color: var(--muted); }
+.ps { padding-block: 36px; border-top: 1px solid var(--line); }
+.ps h2 { font-size: 1.7rem; margin-bottom: 18px; }
+.ps h2.sm { margin-top: 26px; font-size: 1.25rem; }
+.ps ul.list { margin: 0 0 14px; padding-left: 20px; max-width: 68ch; }
+.ps ul.list li { margin-bottom: 8px; }
+@media (max-width: 900px) { .pbody { grid-template-columns: minmax(0, 1fr); gap: 28px; } .panel { position: static; order: -1; } }
+
+/* diagrams */
+.fig { margin: 0 0 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--s1); }
+.fig .scroll { overflow-x: auto; padding: 20px; }
+.fig svg { display: block; width: 100%; height: auto; }
+.fig figcaption { font: 400 12.5px var(--f-mono); color: var(--muted); padding: 12px 20px; border-top: 1px dashed var(--line2); display: flex; gap: 10px; flex-wrap: wrap; align-items: baseline; }
+.gb { fill: none; stroke: var(--line2); stroke-dasharray: 5 5; stroke-width: 1.2; }
+.gl { font: 500 11px var(--f-mono); fill: var(--accent); letter-spacing: .08em; }
+.node { fill: var(--bg); stroke: var(--line2); stroke-width: 1.4; }
+.node.core { stroke: var(--accent); stroke-width: 2; }
+.t1 { font: 500 13px var(--f-mono); fill: var(--ink); }
+.t2 { font: 400 11px var(--f-mono); fill: var(--muted); }
+.tag { font: 500 10.5px var(--f-mono); fill: var(--gold); letter-spacing: .04em; }
+.wire { stroke: var(--gold); stroke-width: 1.6; fill: none; }
+.wire.live { stroke: var(--accent); stroke-dasharray: 6 5; animation: flow 1.4s linear infinite; }
+.arrow { fill: var(--gold); }
+.life { stroke: var(--line2); stroke-dasharray: 4 5; stroke-width: 1.2; }
+@keyframes flow { to { stroke-dashoffset: -22; } }
+@media (prefers-reduced-motion: reduce) { .wire.live { animation: none; } html { scroll-behavior: auto; } }
+
+/* workflow, boards, gallery */
+.flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; counter-reset: st; }
+.flow > div { padding: 18px; background: var(--s1); counter-increment: st; }
+.flow > div::before { content: counter(st); font: 500 12px var(--f-mono); color: var(--accent); display: block; margin-bottom: 8px; }
+.flow h3 { font-size: 1.05rem; margin-bottom: 6px; }
+.flow p { font-size: 14.5px; color: var(--muted); margin: 0 0 8px; }
+.flow .tool { font: 400 11.5px var(--f-mono); color: var(--gold); }
+@media (max-width: 900px) { .flow { grid-template-columns: minmax(0, 1fr); } }
+.boards { display: grid; gap: 20px; }
+.bcard { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 28px; border: 1px solid var(--line); background: var(--s1); border-radius: 6px; padding: 24px; }
+.bcard h3 { font-size: 1.3rem; margin-bottom: 4px; }
+.bcard .n { font: 500 12px var(--f-mono); color: var(--accent); letter-spacing: .08em; }
+.bcard .pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; align-content: start; }
+@media (max-width: 860px) { .bcard { grid-template-columns: minmax(0, 1fr); } }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; align-items: start; }
+.ph { margin: 0; min-width: 0; }
+.ph img { width: 100%; display: block; background: var(--imgbg); border: 1px solid var(--line); border-radius: 4px; aspect-ratio: 4 / 3; object-fit: contain; }
+.ph.tall img { aspect-ratio: auto; object-fit: initial; }
+.ph.sq img { aspect-ratio: 1 / 1; }
+.ph figcaption { font: 400 12.5px var(--f-mono); color: var(--muted); margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+.ph .frame { aspect-ratio: 4 / 3; max-width: 100%; border: 1px dashed var(--line2); border-radius: 4px; display: grid; place-items: center; text-align: center; padding: 12px; background-color: var(--s2); background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 24px 24px; background-position: -1px -1px; }
+.ph .frame > div { background: var(--s2); padding: 8px 12px; border-radius: 3px; }
+.ph .frame b { display: block; font: 500 11px var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.ph .frame span { font: 400 12px var(--f-mono); color: var(--muted); }
+.todo { border: 1px dashed var(--line2); border-radius: 4px; padding: 16px 18px; color: var(--muted); font: 400 13px var(--f-mono); max-width: 68ch; }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--s1); }
+table.cmp { border-collapse: collapse; width: 100%; font-size: 15px; min-width: 520px; }
+table.cmp th, table.cmp td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.cmp th { font: 500 12px var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--s2); }
+table.cmp tr:last-child td { border-bottom: 0; }
+table.cmp td:first-child { font: 500 13.5px var(--f-mono); color: var(--ink); white-space: nowrap; }
+.bars { display: grid; gap: 14px; max-width: 520px; margin-bottom: 8px; }
+.bar-row { display: grid; grid-template-columns: 90px minmax(0, 1fr) 56px; gap: 12px; align-items: center; font: 400 13px var(--f-mono); }
+.bar-row .track { height: 10px; background: var(--s2); border-radius: 2px; overflow: hidden; }
+.bar-row .fill { height: 100%; background: var(--accent); }
+.bar-row b { font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; }
+.next { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-block: 36px 56px; border-top: 1px solid var(--line); }
+.note { font: 400 12.5px var(--f-mono); color: var(--muted); max-width: 68ch; }
+</style>
+
+<a class="skip" href="#main" id="skip">Skip to content</a>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Home">nadine<b>.</b>amdouni</a>
+    <nav class="nav" id="nav" aria-label="Sections"></nav>
+    <div class="ctl">
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" id="btn-fr" aria-pressed="false">FR</button>
+        <button type="button" id="btn-en" aria-pressed="true">EN</button>
+      </div>
+      <button type="button" class="tbtn" id="btn-theme" aria-label="Toggle dark theme">◐</button>
+    </div>
+  </div>
+</header>
+<main id="main"><div id="app"></div></main>
+<footer><div class="wrap" id="foot"></div></footer>
+
+<script>
+/* ================= EDIT HERE: contact details and CV ================= */
+var SITE = {
+  name: "Nadine Amdouni",
+  email: "nadineamdouni22@gmail.com",
+  linkedin: "",
+  github: "https://github.com/nadineamdouni22",
+  cv: ""
+};
+var COLAB = "https://colab.research.google.com/drive/1fw2LQrDLyB30NTq26QRfWL5BMifXwhoZ#scrollTo=FWsNRw0tMlMg&fullscreenOutput=true";
+
+/* ================= language ================= */
+var LANG = "en";
+function L(en, fr) { return LANG === "fr" ? fr : en; }
+function $(s) { return document.querySelector(s); }
+var IMGDIR = "img/";
+
+/* ================= content (edit text here; EN first, FR second) ================= */
+var PROJ = ["aqualink", "agriculture", "locust", "fpga"];
+function dotLabels() { return ["AquaLink V-Drive", "Smart Agriculture IoT", L("Locust detection", "Détection de criquets"), L("FPGA temperature control", "Régulation de température FPGA")]; }
+
+function skills() {
+  return [
+    { t: L("Hardware Design & PCB", "Conception matérielle & PCB"), s: [["Altium Designer",1,0,0,0],[L("Schematics","Schémas électroniques"),1,0,0,0],[L("PCB routing","Routage PCB"),1,0,0,0],["BOM",1,0,0,0],[L("Component selection","Choix des composants"),1,0,0,0]] },
+    { t: L("Embedded Development", "Développement embarqué"), s: [["C",0,1,0,0],["C++",0,1,0,0],["ATmega328P",1,0,0,0],["STM32",0,0,0,0],["ESP32",1,1,0,0]] },
+    { t: L("Communication", "Communication"), s: [["LoRa",1,0,0,0],["GSM / GPRS",1,0,0,0],["RS485",1,0,0,0],["CAN",0,0,0,0],["MQTT",0,0,0,0],["HTTP",0,0,0,0]] },
+    { t: L("Software & Tools", "Logiciels & outils"), s: [["Python",0,0,1,0],["VHDL",0,0,0,1],["Git",0,0,0,0],["Firebase",0,1,0,0],["Flutter",0,1,0,0]] },
+    { t: L("Other", "Autres"), s: [["FPGA",0,0,0,1],["IoT",1,1,0,0],[L("Hardware testing & debugging","Tests et débogage matériel"),1,0,0,0]] }
+  ];
+}
+function experience() {
+  return [
+    { when: "2025", role: L("AI Research Intern", "Stagiaire en recherche IA"), org: "ESSE AI Research", text: L("Built and evaluated a computer-vision pipeline that detects locusts and grasshoppers in field images.", "Développement et évaluation d'un système de vision par ordinateur qui détecte criquets et sauterelles dans des images de terrain."), link: "locust" },
+    { when: "2024", role: L("IoT Software Development Intern", "Stagiaire en développement logiciel IoT"), org: "NA DEV", text: L("Developed a smart irrigation system: an ESP32 device with sensors, a cloud database and a Flutter mobile app.", "Développement d'un système d'irrigation intelligent : carte ESP32 avec capteurs, base de données cloud et application mobile Flutter."), link: "agriculture" },
+    { when: "2022", role: L("Industrial Observation Internship", "Stage d'observation en milieu industriel"), org: "Kromberg & Schubert", text: L("Observed industrial production and electronics manufacturing processes.", "Observation des processus de production industrielle et de fabrication électronique.") }
+  ];
+}
+function education() {
+  return [
+    { when: "2026", role: L("Professional Master's Degree in Embedded Systems", "Master professionnel en Systèmes Embarqués"), org: "ENET'Com, Sfax, Tunisia", text: L("Graduated with distinction (Excellent). Final-year project at Owlinks Technologies: AquaLink V-Drive.", "Diplômée avec la mention « Excellent ». Projet de fin d'études chez Owlinks Technologies : AquaLink V-Drive."), link: "aqualink" },
+    { when: L("Bachelor's", "Licence"), role: L("Bachelor's Degree in Embedded Systems and IoT", "Licence en Systèmes Embarqués et IoT"), org: L("Faculty of Sciences of Tunis", "Faculté des Sciences de Tunis"), text: "" }
+  ];
+}
+
+function projects() {
+  return {
+  aqualink: {
+    title: "AquaLink V-Drive", num: L("Featured project", "Projet phare"),
+    sub: L("Design and implementation of an autonomous electronic system for motorizing manual valves.", "Conception et réalisation d'un système électronique autonome pour la motorisation de vannes manuelles."),
+    ctx: L("Professional Master's final-year project · Owlinks Technologies", "Projet de fin d'études du Master professionnel · Owlinks Technologies"),
+    short: L("Three boards that turn a manual irrigation valve into a solar-powered valve you can command over LoRa.", "Trois cartes qui transforment une vanne d'irrigation manuelle en vanne alimentée par énergie solaire et commandable en LoRa."),
+    tech: ["Altium Designer", "ATmega328P", "ESP32", "LoRa E32-T20D", "L298N", "CN3722 MPPT", "GSM", "RS485", "CD4053"],
+    overview: [
+      L("A manual irrigation valve means someone has to be on site to open it. AquaLink V-Drive motorizes the valve and makes it controllable remotely over LoRa. Each valve node runs from a small solar panel and a 3S Li-ion battery, so it needs no mains connection.",
+        "Avec une vanne d'irrigation manuelle, il faut être sur place pour l'ouvrir. AquaLink V-Drive motorise la vanne et la rend commandable à distance en LoRa. Chaque nœud fonctionne avec un petit panneau solaire et une batterie Li-ion 3S, sans raccordement au secteur."),
+      L("The system is split into three boards: a power board for solar harvesting and charging, a V-Drive board that controls the valve motor, and a gateway board that links the LoRa network to GSM and RS485.",
+        "Le système se compose de trois cartes : une carte d'alimentation pour la récupération solaire et la charge, une carte V-Drive qui commande le moteur de la vanne, et une carte passerelle qui relie le réseau LoRa au GSM et au RS485.")],
+    objectives: [L("Motorize a manual valve and command it remotely.", "Motoriser une vanne manuelle et la commander à distance."), L("Run autonomously from solar energy and a battery.", "Fonctionner de façon autonome grâce à l'énergie solaire et à une batterie."), L("Use long-range LoRa links between valve nodes and a gateway.", "Utiliser des liaisons LoRa longue portée entre les nœuds et une passerelle."), L("Connect the gateway to supervision through GSM and RS485.", "Raccorder la passerelle à la supervision par GSM et RS485.")],
+    contribution: [L("Electronic architecture and schematic design", "Architecture électronique et conception des schémas"), L("Component selection and technical justification", "Choix des composants et justification technique"), L("PCB design and routing in Altium Designer", "Conception et routage des PCB sous Altium Designer"), L("Power management and battery autonomy calculations", "Gestion de l'énergie et calculs d'autonomie de la batterie"), L("Integration of microcontrollers and communication modules", "Intégration des microcontrôleurs et des modules de communication"), L("Hardware assembly, bring-up and bench testing", "Assemblage, mise en service et tests sur banc")],
+    boards: [
+      { n: L("Board 1", "Carte 1"), t: L("Power Board", "Carte d'alimentation"), d: L("Solar energy management with a CN3722 MPPT charger and a 3S Li-ion battery. Separate GND and GNDAUX domains let the rest of the system sleep with a very low idle draw.", "Gestion de l'énergie solaire avec un chargeur MPPT CN3722 et une batterie Li-ion 3S. Des domaines GND et GNDAUX séparés permettent au reste du système de dormir avec une consommation très faible."), chips: ["CN3722 MPPT", "3S Li-ion"],
+        imgs: [["power-render.jpg", "render", L("Power board, 3D render", "Carte d'alimentation, rendu 3D")]] },
+      { n: L("Board 2", "Carte 2"), t: L("V-Drive Board", "Carte V-Drive"), d: L("The valve node. An ATmega328P runs the control logic, drives the motor through an L298N H-bridge, monitors the battery and talks to the gateway through a LoRa E32 module. It has connectors for the motor, two limit switches and a LoRa module, plus a DIP switch and a calibration button.", "Le nœud de la vanne. Un ATmega328P exécute la logique de commande, pilote le moteur par un pont en H L298N, surveille la batterie et dialogue avec la passerelle via un module LoRa E32. La carte comporte des connecteurs pour le moteur, deux fins de course et le module LoRa, ainsi qu'un DIP switch et un bouton de calibration."), chips: ["ATmega328P", "LoRa E32-T20D", "L298N"],
+        imgs: [["vdrive-render.jpg", "render", L("V-Drive board, 3D render", "Carte V-Drive, rendu 3D")], ["vdrive-real.jpg", "real", L("V-Drive board, assembled", "Carte V-Drive assemblée")]] },
+      { n: L("Board 3", "Carte 3"), t: L("Gateway Board", "Carte passerelle"), d: L("An ESP32 bridges the LoRa network to the outside world. The board carries a SIM slot for GSM, two relays, RS485 and isolated inputs, with CD4053 multiplexing for the interfaces, and an external antenna.", "Un ESP32 relie le réseau LoRa au monde extérieur. La carte comporte un support SIM pour le GSM, deux relais, le RS485 et des entrées isolées, avec un multiplexage CD4053 pour les interfaces, et une antenne externe."), chips: ["ESP32", "LoRa", "GSM", "RS485", "CD4053"],
+        imgs: [["gateway-render.jpg", "render", L("Gateway board, 3D render", "Carte passerelle, rendu 3D")], ["gateway-real.jpg", "real", L("Gateway board, assembled", "Carte passerelle assemblée")]] }
+    ],
+    flow: [
+      [L("Architecture", "Architecture"), L("Three-board partition, power budget and communication choices.", "Partition en trois cartes, bilan énergétique et choix de communication."), L("Block diagrams", "Schémas blocs")],
+      [L("Schematic", "Schéma"), L("Circuits for each board, with written justification for each component.", "Circuits de chaque carte, avec justification écrite de chaque composant."), "Altium Designer"],
+      [L("PCB design", "Conception PCB"), L("Placement and routing of the boards.", "Placement et routage des cartes."), "Altium Designer"],
+      [L("Assembly", "Assemblage"), L("Populating the boards and first power-up.", "Soudure des composants et première mise sous tension."), L("Workbench", "Établi")],
+      [L("Testing", "Tests"), L("Bring-up and bench tests of each block, with firmware integration.", "Mise en service et tests sur banc de chaque bloc, avec intégration du firmware."), L("Bench testing", "Tests sur banc")]
+    ],
+    challenges: [
+      L("Energy budget. The node sleeps most of the day, so I sized the battery from a per-mode budget: sleep 0.028 W, a 120 s daily heartbeat at 0.463 W, and a 50 s daily valve action at 3.854 W.", "Bilan énergétique. Le nœud dort la majeure partie de la journée ; j'ai donc dimensionné la batterie à partir d'un bilan par mode : veille 0,028 W, un signal de vie quotidien de 120 s à 0,463 W et une action de vanne quotidienne de 50 s à 3,854 W."),
+      L("Motor current sensing. A 0.5 Ω shunt feeds an RC low-pass filter (1.6 Hz cutoff) and an LM358 amplifier stage (gain 7.8) into the 10-bit ADC of the ATmega328P, with the motor driven by 10 kHz PWM.", "Mesure du courant moteur. Un shunt de 0,5 Ω alimente un filtre RC passe-bas (coupure 1,6 Hz) puis un étage LM358 (gain 7,8) vers l'ADC 10 bits de l'ATmega328P, le moteur étant piloté en PWM à 10 kHz."),
+      L("Power rails. A 12 V input is regulated down to 5 V and 3.3 V, with the microcontroller running at 3.3 V.", "Rails d'alimentation. Une entrée 12 V est régulée en 5 V et 3,3 V, le microcontrôleur fonctionnant en 3,3 V.")
+    ],
+    stats: [["25.2 Wh", L("battery capacity (3S, 2 Ah)", "capacité de la batterie (3S, 2 Ah)")], ["0.69 Wh", L("energy used per day", "énergie consommée par jour")], ["≈ 37 " + L("days", "jours"), L("autonomy without sun", "autonomie sans soleil")]],
+    results: [
+      L("Battery autonomy and the 91 % MPPT efficiency are calculated values, not measurements.", "L'autonomie de la batterie et le rendement MPPT de 91 % sont des valeurs calculées, pas des mesures."),
+      L("The V-Drive control board and the gateway were bench-tested. A CN3722 module stood in for the power board during tests.", "La carte de commande V-Drive et la passerelle ont été testées sur banc. Un module CN3722 a remplacé la carte d'alimentation pendant les tests."),
+      L("Project defended on 21 October 2026.", "Projet soutenu le 21 octobre 2026.")
+    ],
+    docs: [["schematic", L("V-Drive board schematic", "Schéma de la carte V-Drive")], ["schematic", L("Gateway board schematic", "Schéma de la carte passerelle")], ["schematic", L("Power board schematic", "Schéma de la carte d'alimentation")], ["layout", L("PCB routing screenshot (Altium)", "Capture du routage PCB (Altium)")], ["photo", L("Bench test setup", "Banc de test")]],
+    diagrams: "aqua"
+  },
+  agriculture: {
+    title: "Smart Agriculture IoT System", num: L("IoT internship · NA DEV · 2024", "Stage IoT · NA DEV · 2024"),
+    sub: L("A smart irrigation and monitoring system: an ESP32 device with sensors, a cloud database and a Flutter mobile app.", "Un système d'irrigation et de suivi intelligent : une carte ESP32 avec capteurs, une base de données cloud et une application mobile Flutter."),
+    ctx: L("IoT development internship · NA DEV", "Stage de développement IoT · NA DEV"),
+    short: L("An ESP32 reads soil moisture, pH, temperature and humidity, sends them to Firebase, and a Flutter app shows them.", "Un ESP32 mesure l'humidité du sol, le pH, la température et l'humidité de l'air, les envoie à Firebase, et une application Flutter les affiche."),
+    tech: ["ESP32", "Flutter", "Firebase", "DHT11", L("Soil moisture sensor", "Capteur d'humidité du sol"), L("pH sensor", "Capteur de pH"), "C/C++"],
+    overview: [
+      L("An intelligent agriculture monitoring and management system. The prototype has an ESP32 connected to a soil moisture sensor, a pH electrode with its interface module, and a DHT11 for temperature and humidity. A 5 V relay switches a water pump for irrigation.",
+        "Un système intelligent de suivi et de gestion agricole. Le prototype comporte un ESP32 relié à un capteur d'humidité du sol, à une électrode pH avec son module d'interface et à un DHT11 pour la température et l'humidité. Un relais 5 V commande une pompe à eau pour l'irrigation."),
+      L("The readings go to a Firebase backend. A mobile application built with Flutter lists the farmer's fields, the nodes in each field, and the live values of each node, with a Smart Irrigation switch.",
+        "Les mesures sont envoyées vers un backend Firebase. Une application mobile Flutter affiche les champs de l'agriculteur, les nœuds de chaque champ et les valeurs de chaque nœud, avec un interrupteur d'irrigation intelligente.")],
+    objectives: [L("Collect field measurements with IoT sensors on an ESP32.", "Collecter des mesures de terrain avec des capteurs IoT sur un ESP32."), L("Store the data in a cloud backend.", "Stocker les données dans un backend cloud."), L("Present the data in a mobile application for each farmer.", "Présenter les données dans une application mobile pour chaque agriculteur.")],
+    contribution: [L("ESP32 integration", "Intégration de l'ESP32"), L("Embedded development in C/C++", "Développement embarqué en C/C++"), L("Firebase integration", "Intégration de Firebase"), L("Flutter mobile application development", "Développement de l'application mobile Flutter"), L("Sensor data monitoring", "Suivi des données des capteurs")],
+    boards: null,
+    flow: [[L("Sensing", "Mesure"), L("Soil moisture, pH and DHT11 sensors read the field.", "Les capteurs d'humidité du sol, de pH et le DHT11 mesurent le terrain."), "ESP32"], [L("Firmware", "Firmware"), L("C/C++ firmware reads and packages the data.", "Le firmware C/C++ lit et met en forme les données."), "C/C++"], [L("Cloud", "Cloud"), L("Readings are stored in the backend.", "Les mesures sont stockées dans le backend."), "Firebase"], [L("App", "Application"), L("The mobile app shows each node.", "L'application mobile affiche chaque nœud."), "Flutter"], [L("Irrigation", "Irrigation"), L("A relay switches the water pump.", "Un relais commande la pompe à eau."), L("5 V relay", "Relais 5 V")]],
+    challenges: [
+      L("Data pipeline. Getting each sensor reading from the sensor, through the ESP32, into the database and on to the mobile application.", "Chaîne de données. Faire passer chaque mesure du capteur, via l'ESP32, jusqu'à la base de données puis jusqu'à l'application mobile."),
+      L("Authentication. Each farmer has to be authenticated so that the app serves the right fields and nodes to the right person.", "Authentification. Chaque agriculteur doit être authentifié pour que l'application présente les bons champs et les bons nœuds à la bonne personne.")
+    ],
+    stats: null,
+    results: [L("Working prototype: ESP32 with soil moisture, pH and DHT11 sensors, a relay and a pump, feeding a Flutter app that shows moisture, temperature and humidity per node.", "Prototype fonctionnel : ESP32 avec capteurs d'humidité du sol, de pH et DHT11, relais et pompe, alimentant une application Flutter qui affiche humidité du sol, température et humidité par nœud.")],
+    images: [["agri-hardware-1.jpg", "real", L("Prototype: soil moisture sensor, pH electrode, DHT11, 5 V relay and water pump", "Prototype : capteur d'humidité du sol, électrode pH, DHT11, relais 5 V et pompe à eau"), ""], ["agri-hardware-2.jpg", "real", L("Prototype: ESP32 on a breadboard with the pH module", "Prototype : ESP32 sur breadboard avec le module pH"), ""], ["app-fields.jpg", "real", L("App: your fields", "Application : mes champs"), "tall"], ["app-field-detail.jpg", "real", L("App: nodes of a field", "Application : nœuds d'un champ"), "tall"], ["app-node-detail.jpg", "real", L("App: node details and Smart Irrigation switch", "Application : détails d'un nœud et interrupteur d'irrigation"), "tall"]],
+    diagrams: "agri"
+  },
+  locust: {
+    title: L("AI-Based Locust and Grasshopper Detection", "Détection de criquets et sauterelles par IA"), num: L("AI research internship · ESSE AI Research · 2025", "Stage de recherche en IA · ESSE AI Research · 2025"),
+    sub: L("Development and evaluation of an agricultural pest detection system using computer vision.", "Développement et évaluation d'un système de détection de ravageurs agricoles par vision par ordinateur."),
+    ctx: L("AI research internship · ESSE AI Research", "Stage de recherche en IA · ESSE AI Research"),
+    short: L("YOLOv8s reaches about 95 % mAP@0.5 on locust and grasshopper detection.", "YOLOv8s atteint environ 95 % de mAP@0.5 pour la détection de criquets et de sauterelles."),
+    tech: ["Python", "YOLOv8s", "CNN", "MobileNetV2", "EfficientNetB0", "Roboflow", L("Computer vision", "Vision par ordinateur")],
+    overview: [L("Locusts and grasshoppers damage crops quickly, and spotting them early matters. This project builds and evaluates a computer-vision system that detects these insects in images, and compares several models for the task.", "Les criquets et les sauterelles ravagent vite les cultures, et les repérer tôt est essentiel. Ce projet construit et évalue un système de vision par ordinateur qui détecte ces insectes dans des images, et compare plusieurs modèles pour cette tâche.")],
+    objectives: [L("Prepare and annotate a dataset of locust and grasshopper images.", "Préparer et annoter un jeu de données d'images de criquets et de sauterelles."), L("Train a YOLOv8s detector.", "Entraîner un détecteur YOLOv8s."), L("Compare it with CNN-based classifiers: MobileNetV2, EfficientNetB0 and a custom CNN.", "Le comparer à des classifieurs CNN : MobileNetV2, EfficientNetB0 et un CNN personnalisé.")],
+    contribution: [L("Dataset preparation and annotation with Roboflow", "Préparation et annotation du jeu de données avec Roboflow"), L("Model training and evaluation in Python", "Entraînement et évaluation des modèles en Python"), L("Comparison of detection and classification models", "Comparaison des modèles de détection et de classification")],
+    boards: null,
+    flow: [[L("Dataset", "Données"), L("Collect and merge images.", "Collecte et fusion des images."), "Roboflow"], [L("Annotation", "Annotation"), L("Label each insect with a bounding box.", "Étiquetage de chaque insecte par une boîte englobante."), "Roboflow"], [L("Training", "Entraînement"), L("Train YOLOv8s and the classifiers.", "Entraînement de YOLOv8s et des classifieurs."), "Python"], [L("Comparison", "Comparaison"), L("Compare the models on the same data.", "Comparaison des modèles sur les mêmes données."), "Python"], [L("Evaluation", "Évaluation"), L("Measure mAP, recall and speed.", "Mesure du mAP, du rappel et de la vitesse."), ""]],
+    challenges: [L("Dataset. Building the database of images was the biggest challenge of the project: the images had to be collected, merged from several sources and annotated consistently before any model could be trained.", "Base de données. Constituer la base d'images a été le plus grand défi du projet : il a fallu collecter les images, les fusionner depuis plusieurs sources et les annoter de façon cohérente avant de pouvoir entraîner un modèle.")],
+    stats: [["≈ 95 %", "mAP@0.5 (YOLOv8s)"], ["≈ 87 %", L("recall", "rappel")], ["≈ 30 FPS", L("inference, tested environment", "inférence, environnement testé")]],
+    results: [L("Dataset prepared and annotated.", "Jeu de données préparé et annoté."), L("YOLOv8s reached approximately 95 % mAP@0.5 with approximately 87 % recall.", "YOLOv8s a atteint environ 95 % de mAP@0.5 avec environ 87 % de rappel."), L("Inference ran at around 30 frames per second in the tested environment.", "L'inférence tournait à environ 30 images par seconde dans l'environnement testé.")],
+    docs: [["photo", L("Detection example with bounding boxes", "Exemple de détection avec boîtes englobantes")], ["photo", L("Detection example, dense scene", "Exemple de détection, scène dense")], ["chart", L("Training curves", "Courbes d'entraînement")]],
+    link: [COLAB, L("Open the notebook in Google Colab →", "Ouvrir le notebook dans Google Colab →")],
+    diagrams: "locust"
+  },
+  fpga: {
+    title: L("FPGA Temperature Monitoring and Control", "Surveillance et régulation de température sur FPGA"), num: L("FPGA project", "Projet FPGA"),
+    sub: L("A closed-loop temperature control system implemented on an Altera DE2-115 FPGA board in VHDL.", "Un système de régulation de température en boucle fermée, réalisé en VHDL sur une carte FPGA Altera DE2-115."),
+    ctx: L("Embedded design project", "Projet de conception embarquée"),
+    short: L("An LM35 sensor, an ADC, a PID controller and a PWM output close the loop on a DE2-115 board.", "Un capteur LM35, un ADC, un régulateur PID et une sortie PWM ferment la boucle sur une carte DE2-115."),
+    tech: ["Altera DE2-115", "VHDL", "LM35", "ADC", "PID", "PWM", "LCD"],
+    overview: [
+      L("Industrial processes depend on parameters such as temperature, pressure, humidity and light, which must be optimized to produce materials and products of high quality. Temperature is a crucial one: it has to be measured and controlled precisely. Traditional temperature control systems often fall short in precision, reactivity and flexibility. An automatic control system removes human interference and makes temperature control easy.",
+        "Les processus industriels dépendent de paramètres tels que la température, la pression, l'humidité ou la lumière, qui doivent être optimisés pour produire des matériaux et des produits de haute qualité. La température est un paramètre crucial : il faut la mesurer et la contrôler avec précision. Les systèmes de contrôle de température traditionnels présentent souvent des limites en précision, en réactivité et en flexibilité. Un système de contrôle automatique supprime l'interférence humaine et rend la régulation facile."),
+      L("The solution is a closed-loop control system with feedback, built around three elements: acquiring the temperature, processing the information, and applying the feedback. An LM35 sensor turns the temperature into an electrical signal, an amplifier conditions it, and an ADC digitizes the voltage. The digital value goes to the Altera DE2-115 board for processing, which then switches heating or cooling on according to the measured temperature.",
+        "La solution est un système de contrôle en boucle fermée avec rétroaction, construit autour de trois éléments : l'acquisition de la température, le traitement de l'information et la rétroaction. Un capteur LM35 convertit la température en signal électrique, un amplificateur le met en forme et un ADC numérise la tension. La valeur numérique est envoyée à la carte Altera DE2-115 pour traitement, qui active ensuite le chauffage ou le refroidissement selon la température mesurée.")],
+    objectives: [L("Acquire the temperature from an LM35 through an amplifier and an ADC.", "Acquérir la température d'un LM35 via un amplificateur et un ADC."), L("Regulate it with a PID controller written in VHDL.", "La réguler avec un régulateur PID écrit en VHDL."), L("Drive the heating or cooling with PWM and show the values on an LCD.", "Piloter le chauffage ou le refroidissement en PWM et afficher les valeurs sur un LCD.")],
+    contribution: null, boards: null,
+    flow: [[L("Sensing", "Mesure"), L("The LM35 outputs a voltage proportional to temperature.", "Le LM35 délivre une tension proportionnelle à la température."), "LM35"], [L("Conditioning", "Conditionnement"), L("An amplifier prepares the signal for the converter.", "Un amplificateur prépare le signal pour le convertisseur."), L("Amplifier", "Amplificateur")], [L("Conversion", "Conversion"), L("The ADC digitizes the sensor voltage.", "L'ADC numérise la tension du capteur."), "ADC"], [L("Control", "Régulation"), L("A PID block on the FPGA computes the correction.", "Un bloc PID sur le FPGA calcule la correction."), "VHDL"], [L("Output", "Sortie"), L("PWM drives heating or cooling; the LCD shows the temperature.", "Le PWM pilote le chauffage ou le refroidissement ; le LCD affiche la température."), "PWM · LCD"]],
+    challenges: null, stats: null, results: null,
+    docs: [["photo", L("DE2-115 board with the circuit", "Carte DE2-115 avec le circuit")], ["screenshot", L("Simulation waveforms", "Chronogrammes de simulation")], ["screenshot", L("Block design / RTL view", "Schéma bloc / vue RTL")]],
+    diagrams: "fpga"
+  }};
+}
+
+/* ================= diagrams ================= */
+var DEFS = '<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0 0L10 5L0 10z"/></marker></defs>';
+function N(x, y, w, h, t, s, cls) {
+  return '<rect class="node ' + (cls || '') + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="3"/>' +
+    '<text class="t1" x="' + (x + 12) + '" y="' + (y + (s ? h / 2 - 3 : h / 2 + 4)) + '">' + t + '</text>' +
+    (s ? '<text class="t2" x="' + (x + 12) + '" y="' + (y + h / 2 + 14) + '">' + s + '</text>' : '');
+}
+function G(x, y, w, h, label) { return '<rect class="gb" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="6"/><text class="gl" x="' + (x + 14) + '" y="' + (y + 20) + '">' + label + '</text>'; }
+function W(d, opt) { opt = opt || ''; return '<path class="wire ' + opt + '" d="' + d + '" marker-end="url(#ah)"' + (opt.indexOf('bi') > -1 ? ' marker-start="url(#ah)"' : '') + '/>'; }
+function T(x, y, t, anchor) { return '<text class="tag" x="' + x + '" y="' + y + '"' + (anchor ? ' text-anchor="' + anchor + '"' : '') + '>' + t + '</text>'; }
+function FIG(vb, minw, inner, label, cap) {
+  return '<figure class="fig"><div class="scroll"><svg viewBox="0 0 ' + vb + '" style="min-width:' + minw + 'px" role="img" aria-label="' + label + '">' + DEFS + inner + '</svg></div>' +
+    '<figcaption><span class="pill">' + L('Diagram', 'Schéma') + '</span>' + cap + '</figcaption></figure>';
+}
+function aquaArch() {
+  var s = G(10, 20, 230, 440, L('POWER BOARD', "CARTE D'ALIMENTATION")) + G(270, 20, 400, 440, L('V-DRIVE BOARD', 'CARTE V-DRIVE')) + G(760, 20, 230, 440, L('GATEWAY BOARD', 'CARTE PASSERELLE'));
+  s += N(25, 60, 200, 64, L('Solar panel', 'Panneau solaire'), L('energy source', "source d'énergie")) + N(25, 180, 200, 64, 'MPPT CN3722', L('charge control', 'gestion de charge')) + N(25, 300, 200, 64, 'Li-ion 3S · 2 Ah', '25.2 Wh');
+  s += W('M125 124 V178') + W('M125 244 V298') + W('M225 332 H268') + T(125, 410, L('power rails', "rails d'alim."), 'middle');
+  s += N(290, 60, 360, 70, 'ATmega328P-AU', L('control logic · firmware', 'logique de commande · firmware'), 'core');
+  s += N(290, 190, 170, 70, 'L298N', L('H-bridge motor driver', 'pont en H moteur')) + N(480, 190, 170, 70, 'LoRa E32-T20D', L('UART module', 'module UART'));
+  s += N(290, 310, 170, 70, L('Motor + valve', 'Moteur + vanne'), L('limit switches', 'fins de course')) + N(480, 310, 170, 70, L('Battery monitor', 'Suivi batterie'), L('voltage sense', 'mesure de tension'));
+  s += W('M375 130 V188') + T(383, 166, 'PWM · dir') + W('M565 130 V188', 'bi') + T(573, 166, 'UART');
+  s += W('M375 260 V308') + W('M650 95 H662 V345 H652');
+  s += N(775, 60, 200, 54, 'ESP32', L('gateway controller', 'contrôleur passerelle'), 'core') + N(775, 140, 200, 54, 'LoRa', L('radio module', 'module radio')) + N(775, 220, 200, 54, 'GSM / GPRS', L('remote link', 'liaison distante'));
+  s += N(775, 300, 200, 54, 'RS485', L('wired bus', 'bus filaire')) + N(775, 380, 200, 54, 'CD4053', L('multiplexing', 'multiplexage'));
+  s += '<path class="wire" d="M767 87 V407 M767 167 H775 M767 247 H775 M767 327 H775 M767 407 H775 M767 87 H775" />';
+  s += W('M650 225 H715 V167 H758', 'live bi') + T(716, 205, L('LoRa link', 'liaison LoRa'));
+  return FIG('1000 480', 860, s, L('AquaLink V-Drive system architecture', "Architecture du système AquaLink V-Drive"), L('System architecture of the three boards. Simplified block diagram, drawn for this page.', 'Architecture du système à trois cartes. Schéma bloc simplifié, dessiné pour cette page.'));
+}
+function aquaSeq() {
+  var X = [150, 450, 750], s = '';
+  var heads = [[L('Supervisor', 'Supervision'), L('remote platform / operator', 'plateforme distante / opérateur')], [L('Gateway board', 'Carte passerelle'), 'ESP32 · LoRa · GSM · RS485'], [L('V-Drive board', 'Carte V-Drive'), 'ATmega328P · LoRa · L298N']];
+  for (var i = 0; i < 3; i++) s += N(X[i] - 115, 10, 230, 56, heads[i][0], heads[i][1]) + '<line class="life" x1="' + X[i] + '" y1="66" x2="' + X[i] + '" y2="350"/>';
+  s += W('M150 112 H446') + T(298, 102, L('1  valve command · GSM or RS485', '1  commande de vanne · GSM ou RS485'), 'middle');
+  s += W('M450 167 H746', 'live') + T(598, 157, L('2  command frame · LoRa', '2  trame de commande · LoRa'), 'middle');
+  s += N(620, 190, 260, 48, L('Wake · drive L298N', 'Réveil · pilotage L298N'), L('read limit switches', 'lecture des fins de course'));
+  s += W('M746 280 H454', 'live') + T(598, 270, L('4  status: valve position, battery · LoRa', '4  état : position vanne, batterie · LoRa'), 'middle');
+  s += W('M446 330 H154') + T(298, 320, L('5  confirmation · GSM or RS485', '5  confirmation · GSM ou RS485'), 'middle');
+  return FIG('900 360', 760, s, L('Sequence of a valve command', "Séquence d'une commande de vanne"), L('Command and status exchange between the gateway and a V-Drive node. Simplified flow.', "Échange de commande et d'état entre la passerelle et un nœud V-Drive. Flux simplifié."));
+}
+function agriArch() {
+  var s = N(10, 14, 200, 56, L('Soil moisture sensor', "Capteur d'humidité sol")) + N(10, 84, 200, 56, L('pH electrode + module', 'Électrode pH + module')) + N(10, 154, 200, 56, 'DHT11', L('temperature · humidity', 'température · humidité'));
+  s += N(270, 84, 170, 70, 'ESP32', L('C/C++ firmware', 'firmware C/C++'), 'core') + N(500, 84, 170, 70, 'Firebase', L('cloud database', 'base de données cloud')) + N(730, 84, 160, 70, L('Flutter app', 'App Flutter'), L('per-farmer login', 'connexion par agriculteur'));
+  s += W('M210 42 H240 V105 H268') + W('M210 112 H268') + W('M210 182 H240 V133 H268') + W('M440 119 H498') + T(469, 108, 'upload', 'middle') + W('M670 119 H728') + T(699, 108, L('display', 'affichage'), 'middle');
+  s += N(270, 190, 170, 56, L('5 V relay', 'Relais 5 V')) + N(500, 190, 170, 56, L('Water pump', 'Pompe à eau')) + W('M355 154 V188') + W('M440 218 H498');
+  return FIG('900 262', 760, s, L('Smart agriculture architecture', "Architecture de l'agriculture intelligente"), L('Data path from the field device to the mobile app. Simplified block diagram, drawn for this page.', "Chemin des données du dispositif de terrain à l'application mobile. Schéma bloc simplifié, dessiné pour cette page."));
+}
+function locustArch() {
+  var n = [[L('Dataset', 'Données'), L('merged images · Roboflow', 'images fusionnées · Roboflow')], [L('Annotation', 'Annotation'), L('bounding boxes', 'boîtes englobantes')], ['YOLOv8s', L('detection', 'détection')], [L('Classifiers', 'Classifieurs'), 'MobileNetV2 · EfficientNetB0 · CNN'], [L('Evaluation', 'Évaluation'), 'mAP · ' + L('recall', 'rappel') + ' · FPS']], s = '';
+  for (var i = 0; i < 5; i++) {
+    s += N(10 + i * 178, 50, 160, 76, n[i][0], '', i === 2 ? 'core' : '');
+    n[i][1].split(' · ').forEach(function (ln, k) { s += '<text class="t2" x="' + (22 + i * 178) + '" y="' + (50 + 52 + k * 13) + '">' + ln + '</text>'; });
+    if (i < 4) s += W('M' + (170 + i * 178) + ' 88 H' + (186 + i * 178));
+  }
+  return FIG('900 170', 760, s, L('Pest detection workflow', 'Chaîne de détection des ravageurs'), L('Dataset and training workflow. Simplified block diagram, drawn for this page.', "Chaîne de données et d'entraînement. Schéma bloc simplifié, dessiné pour cette page."));
+}
+function fpgaArch() {
+  var s = N(10, 105, 110, 60, 'LM35', L('temperature', 'température')) + N(140, 105, 110, 60, L('Amplifier', 'Amplificateur')) + N(270, 105, 90, 60, 'ADC');
+  s += G(385, 30, 400, 230, 'ALTERA DE2-115 · VHDL');
+  s += N(400, 105, 110, 60, L('ADC interface', 'Interface ADC')) + N(525, 105, 90, 60, 'PID', L('controller', 'régulateur'), 'core') + N(630, 105, 140, 60, 'PWM', L('generator', 'générateur')) + N(525, 190, 90, 52, L('LCD driver', 'Pilote LCD'));
+  s += N(810, 105, 140, 60, L('Heater / cooler', 'Chauffage / refroid.'), L('PWM drive', 'commande PWM')) + N(810, 190, 140, 52, 'LCD', L('temperature', 'température'));
+  s += W('M120 135 H138') + W('M250 135 H268') + W('M360 135 H398') + W('M510 135 H523') + W('M615 135 H628') + W('M770 135 H808') + W('M570 165 V188') + W('M615 216 H808');
+  s += T(880, 90, L('feedback', 'rétroaction'), 'middle');
+  return FIG('960 280', 820, s, L('FPGA temperature control block diagram', 'Schéma bloc de la régulation de température FPGA'), L('Functional block diagram of the closed loop. Simplified, drawn for this page.', 'Schéma fonctionnel de la boucle fermée. Simplifié, dessiné pour cette page.'));
+}
+function diagramsFor(k) {
+  if (k === 'aqua') return [[L('System architecture', 'Architecture du système'), aquaArch()], [L('Gateway to V-Drive communication', 'Communication passerelle / V-Drive'), aquaSeq()]];
+  if (k === 'agri') return [[L('System architecture and data flow', 'Architecture et flux de données'), agriArch()]];
+  if (k === 'locust') return [[L('Dataset and training workflow', "Chaîne de données et d'entraînement"), locustArch()]];
+  return [[L('Functional block diagram', 'Schéma fonctionnel'), fpgaArch()]];
+}
+
+/* ================= pieces ================= */
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;'); }
+function IMG(file, kind, cap, cls) {
+  var label = kind === 'real' ? L('Real photo', 'Photo réelle') : kind === 'render' ? L('3D render', 'Rendu 3D') : L('Screenshot', "Capture d'écran");
+  return '<figure class="ph ' + (cls || '') + '"><img src="' + IMGDIR + file + '" alt="' + esc(cap) + '" loading="lazy"><figcaption><span class="pill ' + (kind === 'real' ? 'real' : '') + '">' + label + '</span>' + cap + '</figcaption></figure>';
+}
+function PH(type, cap) {
+  var t = { photo: L('Real photo to add', 'Photo réelle à ajouter'), render: L('3D render to add', 'Rendu 3D à ajouter'), layout: L('PCB layout to add', 'Layout PCB à ajouter'), schematic: L('Schematic to add', 'Schéma à ajouter'), screenshot: L('Screenshot to add', "Capture à ajouter"), chart: L('Figure to add', 'Figure à ajouter') }[type];
+  return '<figure class="ph"><div class="frame"><div><b>' + t + '</b><span>' + L('placeholder', 'emplacement') + '</span></div></div><figcaption>' + cap + '</figcaption></figure>';
+}
+function todo(t) { return '<div class="todo">' + L('To add: ', 'À ajouter : ') + t + '</div>'; }
+function chips(a, dim) { return '<ul class="chips' + (dim ? ' dim' : '') + '">' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; }
+function stats(a, sm) { return '<div class="stats' + (sm ? ' sm' : '') + '">' + a.map(function (x) { return '<div><strong>' + x[0] + '</strong><span>' + x[1] + '</span></div>'; }).join('') + '</div>'; }
+function dots(a) {
+  var lab = dotLabels(), used = lab.filter(function (_, i) { return a[i]; });
+  var s = '<span class="dots" role="img" aria-label="' + L('Used in: ', 'Utilisé dans : ') + (used.length ? used.join(', ') : L('no listed project', 'aucun projet listé')) + '">';
+  for (var i = 0; i < 4; i++) s += '<i class="' + (a[i] ? 'on' : '') + '" title="' + lab[i] + '"></i>';
+  return s + '</span>';
+}
+function timeline(a) {
+  return '<ol class="tl">' + a.map(function (e) {
+    return '<li><time>' + e.when + '</time><div><h3>' + e.role + '</h3><p class="org">' + e.org + '</p>' + (e.text ? '<p>' + e.text + '</p>' : '') + (e.link ? '<a class="lnk" href="#' + e.link + '">' + L('See the project →', 'Voir le projet →') + '</a>' : '') + '</div></li>';
+  }).join('') + '</ol>';
+}
+function glyph(id) {
+  var g = '';
+  if (id === 'locust') g = '<rect class="g-frame" x="30" y="24" width="260" height="132" rx="3"/><ellipse class="g-fill" cx="120" cy="86" rx="22" ry="9"/><ellipse class="g-fill" cx="220" cy="110" rx="18" ry="8"/><rect class="g-box" x="90" y="66" width="62" height="40"/><rect class="g-box" x="194" y="92" width="52" height="36"/><text class="t2g" x="90" y="60">locust</text><text class="t2g" x="194" y="86">grasshopper</text>';
+  else g = '<rect class="g-frame" x="40" y="26" width="240" height="128" rx="3"/><rect class="g-fill" x="56" y="44" width="62" height="34"/><rect class="g-fill" x="130" y="44" width="62" height="34"/><rect class="g-fill" x="204" y="44" width="62" height="34"/><rect class="g-fill" x="56" y="100" width="62" height="34"/><rect class="g-fill" x="130" y="100" width="62" height="34"/><rect class="g-fill" x="204" y="100" width="62" height="34"/><path class="g-line" d="M118 61 H130 M192 61 H204 M87 78 V100 M161 78 V100"/>';
+  return '<svg viewBox="0 0 320 180" role="img" aria-label="' + L('Illustration', 'Illustration') + '">' + g + '</svg>';
+}
+
+/* ================= pages ================= */
+var P, view = 'home';
+function navHtml() {
+  return [['about', L('About', 'À propos')], ['skills', L('Skills', 'Compétences')], ['projects', L('Projects', 'Projets')], ['experience', L('Experience', 'Expérience')], ['education', L('Education', 'Formation')], ['contact', 'Contact']]
+    .map(function (x) { return '<a href="#' + x[0] + '">' + x[1] + '</a>'; }).join('');
+}
+function contactRow(k, v, kind) {
+  var val;
+  if (!v) val = '<span class="empty">' + L('to be added', 'à ajouter') + '</span>';
+  else if (kind === 'mail') val = '<span>' + v + '</span><button type="button" class="copy" data-copy="' + v + '">' + L('Copy', 'Copier') + '</button><a class="lnk" href="mailto:' + v + '">' + L('Write', 'Écrire') + '</a>';
+  else val = '<a class="lnk" style="font-size:15px" href="' + v + '" target="_blank" rel="noopener">' + v.replace(/^https?:\/\/(www\.)?/, '') + '</a>';
+  return '<dt>' + k + '</dt><dd>' + val + '</dd>';
+}
+function renderHome() {
+  var a = P.aqualink;
+  var qa = [
+    [L('What can I design?', 'Que sais-je concevoir ?'), L("Autonomous electronic systems end to end: a solar power stage, an MCU control board and an RF gateway. AquaLink V-Drive is three boards I architected and drew in Altium Designer.", "Des systèmes électroniques autonomes de bout en bout : étage d'alimentation solaire, carte de commande à microcontrôleur et passerelle radio. AquaLink V-Drive, ce sont trois cartes que j'ai architecturées et dessinées sous Altium Designer."), 'aqualink', L('AquaLink V-Drive →', 'AquaLink V-Drive →')],
+    [L('Which microcontrollers?', 'Quels microcontrôleurs ?'), L('ATmega328P and ESP32 in finished projects. STM32 is part of my skill set.', "ATmega328P et ESP32 dans des projets aboutis. STM32 fait partie de mes compétences."), 'skills', L('See skills →', 'Voir les compétences →')],
+    [L('Schematics and PCBs?', 'Schémas et PCB ?'), L('Yes. Schematics, component selection with written justification, and PCB routing in Altium Designer.', "Oui. Schémas, choix des composants avec justification écrite et routage de PCB sous Altium Designer."), 'boards', L('See the three boards →', 'Voir les trois cartes →')],
+    [L('Hardware and firmware integration?', 'Intégration matériel et firmware ?'), L('Yes. I integrated microcontrollers with LoRa, GSM, RS485 and motor drivers, and built ESP32, Firebase and Flutter pieces in an IoT internship.', "Oui. J'ai intégré des microcontrôleurs avec LoRa, GSM, RS485 et des drivers moteur, et réalisé les parties ESP32, Firebase et Flutter lors d'un stage IoT."), 'agriculture', L('Smart Agriculture IoT →', 'Smart Agriculture IoT →')],
+    [L('Debugging and testing?', 'Débogage et tests ?'), L('Assembly, bring-up and bench testing of the AquaLink boards, with firmware integration.', "Assemblage, mise en service et tests sur banc des cartes AquaLink, avec intégration du firmware."), 'aqualink', L('See the workflow →', 'Voir la méthode →')],
+    [L('Real projects?', 'Projets réels ?'), L('Four: AquaLink V-Drive, Smart Agriculture IoT, locust detection with YOLOv8s, and FPGA temperature control.', "Quatre : AquaLink V-Drive, Smart Agriculture IoT, détection de criquets avec YOLOv8s et régulation de température sur FPGA."), 'projects', L('All projects →', 'Tous les projets →')]
+  ].map(function (q) { return '<div><div class="q">' + q[0] + '</div><p>' + q[1] + '</p><a href="#' + q[2] + '">' + q[3] + '</a></div>'; }).join('');
+
+  var sk = skills().map(function (c) {
+    return '<div class="skillcard"><h3>' + c.t + '</h3>' + c.s.map(function (r) { return '<div class="skillrow"><span>' + r[0] + '</span>' + dots(r.slice(1)) + '</div>'; }).join('') + '</div>';
+  }).join('');
+
+  var cards = ['agriculture', 'locust', 'fpga'].map(function (id) {
+    var p = P[id];
+    var thumb = id === 'agriculture' ? '<img src="' + IMGDIR + 'agri-hardware-1.jpg" alt="' + esc(L('Smart irrigation prototype', "Prototype d'irrigation intelligente")) + '" loading="lazy"><span class="pill real">' + L('Real photo', 'Photo réelle') + '</span>' : glyph(id) + '<span class="pill">' + L('Illustration', 'Illustration') + '</span>';
+    return '<a class="card" href="#' + id + '"><div class="thumb">' + thumb + '</div><div class="body"><div class="ctx">' + p.num + '</div><h3>' + p.title + '</h3><p>' + p.short + '</p>' + chips(p.tech.slice(0, 4), true) + '<span class="more">' + L('Open case study →', "Ouvrir l'étude de cas →") + '</span></div></a>';
+  }).join('');
+
+  var strip = '<div class="strip"><figure><img src="' + IMGDIR + 'power-render.jpg" alt="' + esc(L('Power board render', "Rendu de la carte d'alimentation")) + '"><figcaption>' + L('Power', 'Alimentation') + '</figcaption></figure>' +
+    '<figure><img src="' + IMGDIR + 'vdrive-render.jpg" alt="' + esc(L('V-Drive board render', 'Rendu de la carte V-Drive')) + '"><figcaption>V-Drive</figcaption></figure>' +
+    '<figure><img src="' + IMGDIR + 'gateway-render.jpg" alt="' + esc(L('Gateway board render', 'Rendu de la carte passerelle')) + '"><figcaption>' + L('Gateway', 'Passerelle') + '</figcaption></figure>' +
+    '<div class="note"><span class="pill">' + L('3D render', 'Rendu 3D') + '</span>' + L('The three boards of the system.', 'Les trois cartes du système.') + '</div></div>';
+
+  $('#app').innerHTML =
+  '<section class="hero" id="top"><div class="wrap"><div><p class="eyebrow">' + L('Embedded systems · PCB design · Firmware', 'Systèmes embarqués · Conception PCB · Firmware') + '</p><h1>' + SITE.name + '</h1><p class="role">' + L('Junior Embedded Systems / Hardware & Firmware Integration Specialist', 'Spécialiste junior en systèmes embarqués / intégration matériel et firmware') + '</p>' +
+  '<p class="lede">' + L('I design and bring up embedded hardware: schematics, PCBs in Altium Designer, and the firmware that makes them work. My thesis system motorizes irrigation valves, runs on solar power and reports over LoRa.', "Je conçois et mets en service du matériel embarqué : schémas, PCB sous Altium Designer et firmware qui les fait fonctionner. Mon système de PFE motorise des vannes d'irrigation, fonctionne à l'énergie solaire et communique en LoRa.") + '</p>' +
+  '<div class="btns"><a class="btn pri" href="#projects">' + L('View projects', 'Voir les projets') + '</a><a class="btn" href="#contact">' + L('Contact me', 'Me contacter') + '</a>' + (SITE.cv ? '<a class="btn" href="' + SITE.cv + '" target="_blank" rel="noopener">' + L('Download CV', 'Télécharger le CV') + '</a>' : '') + '</div>' +
+  chips(['ATmega328P', 'STM32', 'ESP32', 'Altium Designer', 'LoRa', 'GSM', 'RS485']) + '</div>' +
+  '<div class="collage"><div class="two"><img src="' + IMGDIR + 'vdrive-real.jpg" alt="' + esc(L('Assembled V-Drive board', 'Carte V-Drive assemblée')) + '"><img src="' + IMGDIR + 'gateway-real.jpg" alt="' + esc(L('Assembled gateway board', 'Carte passerelle assemblée')) + '"></div><div class="cap"><span class="pill real">' + L('Real photo', 'Photo réelle') + '</span>' + L('AquaLink V-Drive: V-Drive board (left) and gateway board (right).', 'AquaLink V-Drive : carte V-Drive (à gauche) et carte passerelle (à droite).') + '</div></div></div></section>' +
+
+  '<section class="sec" id="glance"><div class="wrap"><div class="sec-head"><h2>' + L('What a recruiter wants to know', 'Ce qu’un recruteur veut savoir') + '</h2><p>' + L('Direct answers, each linked to the evidence.', 'Des réponses directes, chacune reliée à sa preuve.') + '</p></div><div class="qa">' + qa + '</div></div></section>' +
+
+  '<section class="sec" id="about"><div class="wrap"><div class="sec-head"><h2>' + L('About', 'À propos') + '</h2></div><div class="about"><div>' +
+  '<p>' + L("I am a junior embedded systems specialist who likes the point where a circuit meets its firmware. My main interests are electronic hardware design, PCB development, embedded C/C++, and hardware and firmware integration on ATmega328P, STM32 and ESP32.", "Je suis spécialiste junior en systèmes embarqués, attirée par le point de rencontre entre un circuit et son firmware. Mes centres d'intérêt : la conception électronique, le développement de PCB, le C/C++ embarqué et l'intégration matériel et firmware sur ATmega328P, STM32 et ESP32.") + '</p>' +
+  '<p>' + L("I start from the constraints of a system, such as energy, board area and communication range, and work toward a schematic I can justify component by component. I then bring the board up myself and test it block by block, so firmware and hardware meet early.", "Je pars des contraintes d'un système, comme l'énergie, la surface de carte et la portée de communication, pour arriver à un schéma que je peux justifier composant par composant. Je mets ensuite la carte en service moi-même et la teste bloc par bloc, pour que matériel et firmware se rencontrent tôt.") + '</p>' +
+  '<p>' + L("I am looking for opportunities in embedded systems, electronics, PCB design, hardware development and firmware integration, in Tunisia and internationally.", "Je recherche des opportunités en systèmes embarqués, électronique, conception PCB, développement matériel et intégration firmware, en Tunisie et à l'international.") + '</p></div>' +
+  '<div class="facts"><div class="fact"><b>' + L('Education', 'Formation') + '</b>' + L("Professional Master's in Embedded Systems, ENET'Com Sfax, with distinction (Excellent). Bachelor's in Embedded Systems and IoT, Faculty of Sciences of Tunis.", "Master professionnel en Systèmes Embarqués, ENET'Com Sfax, mention Excellent. Licence en Systèmes Embarqués et IoT, Faculté des Sciences de Tunis.") + '</div>' +
+  '<div class="fact"><b>' + L('Interests', "Centres d'intérêt") + '</b>' + L('Hardware design, PCB, embedded C/C++, microcontrollers, IoT, communication protocols, testing and debugging.', 'Conception matérielle, PCB, C/C++ embarqué, microcontrôleurs, IoT, protocoles de communication, tests et débogage.') + '</div>' +
+  '<div class="fact"><b>' + L('Location', 'Localisation') + '</b>' + L('Tunisia · open to international roles', "Tunisie · ouverte aux postes à l'international") + '</div></div></div></div></section>' +
+
+  '<section class="sec" id="skills"><div class="wrap"><div class="sec-head"><h2>' + L('Technical skills', 'Compétences techniques') + '</h2><p>' + L('Each skill shows the projects where I used it.', "Chaque compétence indique les projets où je l'ai utilisée.") + '</p></div><div class="skillgrid">' + sk + '</div>' +
+  '<div class="legend">' + dotLabels().map(function (l) { return '<span><i></i>' + l + '</span>'; }).join('') + '<span><i class="o"></i><em>' + L('Hollow: in my toolkit, not in a listed project yet', 'Vide : dans ma boîte à outils, pas encore dans un projet listé') + '</em></span></div></div></section>' +
+
+  '<section class="sec" id="projects"><div class="wrap"><div class="sec-head"><h2>' + L('Projects', 'Projets') + '</h2><p>' + L('Four projects, from a three-board hardware system to IoT, AI and FPGA work.', "Quatre projets, d'un système matériel à trois cartes à l'IoT, l'IA et le FPGA.") + '</p></div>' +
+  '<article class="feature" id="boards"><div class="top"><div><p class="eyebrow">' + a.num + '</p><h3>' + a.title + '</h3><p class="tagline">' + a.sub + '</p>' + stats(a.stats, true) + '<p>' + a.short + L(' My part: architecture, schematics, component selection, PCB design in Altium Designer, power calculations, and assembly and testing.', " Ma part : architecture, schémas, choix des composants, conception PCB sous Altium Designer, calculs énergétiques, assemblage et tests.") + '</p>' + chips(a.tech.slice(0, 6), true) + '<p></p><div class="btns"><a class="btn pri" href="#aqualink">' + L('Open case study', "Ouvrir l'étude de cas") + '</a></div></div>' + strip + '</div></article>' +
+  '<div class="grid3">' + cards + '</div></div></section>' +
+
+  '<section class="sec" id="experience"><div class="wrap"><div class="sec-head"><h2>' + L('Experience', 'Expérience') + '</h2></div>' + timeline(experience()) + '</div></section>' +
+  '<section class="sec" id="education"><div class="wrap"><div class="sec-head"><h2>' + L('Education', 'Formation') + '</h2></div>' + timeline(education()) + '</div></section>' +
+
+  '<section class="sec" id="contact"><div class="wrap"><div class="sec-head"><h2>Contact</h2><p>' + L('Open to junior PCB design, embedded hardware and hardware/firmware integration roles.', "Ouverte aux postes juniors en conception PCB, matériel embarqué et intégration matériel/firmware.") + '</p></div><dl class="contact">' +
+  contactRow('Email', SITE.email, 'mail') + contactRow('LinkedIn', SITE.linkedin) + contactRow('GitHub', SITE.github) + '<dt>' + L('Location', 'Localisation') + '</dt><dd>' + L('Tunisia', 'Tunisie') + '</dd></dl></div></section>';
+}
+
+function renderProject(id) {
+  var p = P[id], i = PROJ.indexOf(id), nid = PROJ[(i + 1) % PROJ.length], nx = P[nid];
+  var diags = diagramsFor(p.diagrams).map(function (d) { return '<section class="ps"><h2>' + d[0] + '</h2>' + d[1] + '</section>'; }).join('');
+  var boards = p.boards ? '<section class="ps"><h2>' + L('The three boards', 'Les trois cartes') + '</h2><div class="boards">' + p.boards.map(function (b) {
+    return '<article class="bcard"><div><div class="n">' + b.n.toUpperCase() + '</div><h3>' + b.t + '</h3><p>' + b.d + '</p>' + chips(b.chips, true) + '</div><div class="pair">' + b.imgs.map(function (m) { return IMG(m[0], m[1], m[2], 'sq'); }).join('') + '</div></article>';
+  }).join('') + '</div></section>' : '';
+  var flow = '<section class="ps"><h2>' + (p.boards ? L('Development workflow', 'Méthode de développement') : L('Workflow', 'Chaîne de traitement')) + '</h2><div class="flow">' + p.flow.map(function (f) { return '<div><h3>' + f[0] + '</h3><p>' + f[1] + '</p>' + (f[2] ? '<span class="tool">' + f[2] + '</span>' : '') + '</div>'; }).join('') + '</div></section>';
+  var cmp = '';
+  if (id === 'locust') {
+    cmp = '<section class="ps"><h2>' + L('Model comparison', 'Comparaison des modèles') + '</h2><div class="tablewrap"><table class="cmp"><thead><tr><th>' + L('Model', 'Modèle') + '</th><th>' + L('Task', 'Tâche') + '</th><th>' + L('Role in the project', 'Rôle dans le projet') + '</th></tr></thead><tbody>' +
+      '<tr><td>YOLOv8s</td><td>' + L('Detection', 'Détection') + '</td><td>' + L('Finds each insect and draws its bounding box. Reached about 95 % mAP@0.5 and 87 % recall.', "Localise chaque insecte et trace sa boîte englobante. Environ 95 % de mAP@0.5 et 87 % de rappel.") + '</td></tr>' +
+      '<tr><td>MobileNetV2</td><td>Classification</td><td>' + L('Lightweight CNN backbone evaluated as a classifier.', 'Réseau CNN léger évalué comme classifieur.') + '</td></tr>' +
+      '<tr><td>EfficientNetB0</td><td>Classification</td><td>' + L('Compared against MobileNetV2 on the same data.', 'Comparé à MobileNetV2 sur les mêmes données.') + '</td></tr>' +
+      '<tr><td>' + L('Custom CNN', 'CNN personnalisé') + '</td><td>Classification</td><td>' + L('Baseline network designed for this task.', 'Réseau de référence conçu pour cette tâche.') + '</td></tr></tbody></table></div><p class="note" style="margin-top:12px">' + L('Detection figures are approximate and come from the tested setup.', "Les chiffres de détection sont approximatifs et issus de l'environnement testé.") + '</p></section>';
+  }
+  var bars = id === 'locust' ? '<div class="bars"><div class="bar-row"><span>mAP@0.5</span><div class="track"><div class="fill" style="width:95%"></div></div><b>≈ 95%</b></div><div class="bar-row"><span>' + L('Recall', 'Rappel') + '</span><div class="track"><div class="fill" style="width:87%"></div></div><b>≈ 87%</b></div></div>' : '';
+  var chall = '<section class="ps"><h2>' + L('Challenges and design decisions', 'Défis et choix de conception') + '</h2>' + (p.challenges ? '<ul class="list">' + p.challenges.map(function (c) { return '<li>' + c + '</li>'; }).join('') + '</ul>' : todo(L('the main technical challenges you solved and how', 'les principaux défis techniques rencontrés et comment vous les avez résolus'))) + '</section>';
+  var results = '<section class="ps"><h2>' + L('Results', 'Résultats') + '</h2>' + (p.stats ? stats(p.stats) : '') + bars + (p.results ? '<ul class="list">' + p.results.map(function (r) { return '<li>' + r + '</li>'; }).join('') + '</ul>' : todo(L('measured results of this project', 'les résultats mesurés de ce projet'))) + (p.link ? '<p><a class="btn" href="' + p.link[0] + '" target="_blank" rel="noopener">' + p.link[1] + '</a></p>' : '') + '</section>';
+  var gal = '';
+  if (p.images) gal += '<section class="ps"><h2>' + L('Gallery', 'Galerie') + '</h2><div class="gallery">' + p.images.map(function (m) { return IMG(m[0], m[1], m[2], m[3]); }).join('') + '</div></section>';
+  if (p.docs) gal += '<section class="ps"><h2>' + (id === 'aqualink' ? L('Design documents', 'Documents de conception') : L('Gallery', 'Galerie')) + '</h2><div class="gallery">' + p.docs.map(function (g) { return PH(g[0], g[1]); }).join('') + '</div></section>';
+
+  $('#app').innerHTML =
+  '<div class="wrap"><section class="phead" id="top"><a class="crumb" href="#projects">← ' + L('All projects', 'Tous les projets') + '</a><p class="eyebrow">' + p.num + '</p><h1>' + p.title + '</h1><p class="sub">' + p.sub + '</p>' + chips(p.tech) + '</section>' +
+  '<div class="pbody"><div><section class="ps" style="border-top:0;padding-top:0"><h2>' + L('Overview', 'Présentation') + '</h2>' + p.overview.map(function (t) { return '<p>' + t + '</p>'; }).join('') + '<h2 class="sm">' + L('Objectives', 'Objectifs') + '</h2><ul class="list">' + p.objectives.map(function (o) { return '<li>' + o + '</li>'; }).join('') + '</ul></section>' + diags + boards + flow + cmp + chall + results + gal + '</div>' +
+  '<aside class="panel" aria-label="' + L('My contribution', 'Ma contribution') + '"><h2>' + L('My contribution', 'Ma contribution') + '</h2>' + (p.contribution ? '<ul>' + p.contribution.map(function (c) { return '<li>' + c + '</li>'; }).join('') + '</ul>' : '<div class="none">' + L('To add: what you designed, built and tested in this project.', 'À ajouter : ce que vous avez conçu, réalisé et testé dans ce projet.') + '</div>') + '<p class="ctxl">' + p.ctx + '</p></aside></div>' +
+  '<div class="next"><a class="btn" href="#projects">← ' + L('All projects', 'Tous les projets') + '</a><a class="btn pri" href="#' + nid + '">' + L('Next: ', 'Suivant : ') + nx.title + ' →</a></div></div>';
+}
+
+/* ================= shell, router, toggles ================= */
+function shell() {
+  $('#nav').innerHTML = navHtml();
+  $('#skip').textContent = L('Skip to content', 'Aller au contenu');
+  $('#foot').innerHTML = '© 2026 Nadine Amdouni · ' + L('Tunisia', 'Tunisie');
+  $('#btn-fr').setAttribute('aria-pressed', String(LANG === 'fr'));
+  $('#btn-en').setAttribute('aria-pressed', String(LANG === 'en'));
+  document.documentElement.lang = LANG;
+  document.title = 'Nadine Amdouni · Portfolio';
+}
+function draw() {
+  P = projects(); shell();
+  if (view !== 'home' && P[view]) renderProject(view); else renderHome();
+}
+function route() {
+  var h = (location.hash || '').slice(1);
+  var prev = view;
+  P = projects();
+  if (P[h]) { view = h; draw(); window.scrollTo(0, 0); return; }
+  view = 'home';
+  if (prev !== 'home' || !$('#app').innerHTML) draw();
+  var el = h && document.getElementById(h);
+  if (el) el.scrollIntoView(); else window.scrollTo(0, 0);
+}
+function setLang(l) { LANG = l; try { localStorage.setItem('pf-lang', l); } catch (e) {} draw(); }
+function setTheme(t) {
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); else document.documentElement.removeAttribute('data-theme');
+  try { localStorage.setItem('pf-theme', t); } catch (e) {}
+  $('#btn-theme').setAttribute('aria-pressed', String(t === 'dark'));
+}
+$('#btn-fr').addEventListener('click', function () { setLang('fr'); });
+$('#btn-en').addEventListener('click', function () { setLang('en'); });
+$('#btn-theme').addEventListener('click', function () { setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); });
+document.addEventListener('click', function (e) {
+  var b = e.target.closest && e.target.closest('[data-copy]');
+  if (!b) return;
+  var v = b.getAttribute('data-copy');
+  function ok() { b.textContent = L('Copied', 'Copié'); setTimeout(function () { b.textContent = L('Copy', 'Copier'); }, 1500); }
+  try { navigator.clipboard.writeText(v).then(ok, function () { window.getSelection().selectAllChildren(b.previousElementSibling); }); } catch (err) { window.getSelection().selectAllChildren(b.previousElementSibling); }
+});
+window.addEventListener('hashchange', route);
+(function () {
+  var l = null, t = null;
+  try { l = localStorage.getItem('pf-lang'); t = localStorage.getItem('pf-theme'); } catch (e) {}
+  LANG = l || ((navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en');
+  setTheme(t === 'dark' ? 'dark' : 'light');
+  route();
+})();
+</script>
+
+</body></html>
